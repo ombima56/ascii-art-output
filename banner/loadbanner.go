@@ -1,4 +1,4 @@
-package loadbanner
+package ascii
 
 import (
 	"bufio"
@@ -12,7 +12,7 @@ func LoadBanner(input string) map[rune]string {
 	banner := make(map[rune]string)
 	currentChar := rune(32)
 	charLine := []string{}
-	filePath := "./bannerfile/" + input + ".txt"
+	filePath := "./bannerFiles/" + input + ".txt"
 
 	// File openning
 
@@ -28,6 +28,7 @@ func LoadBanner(input string) map[rune]string {
 	scanner.Scan()
 	for scanner.Scan() {
 		line := scanner.Text()
+
 		if height == 8 {
 			banner[currentChar] = strings.Join(charLine, "\n")
 			currentChar++
@@ -36,6 +37,7 @@ func LoadBanner(input string) map[rune]string {
 
 		} else {
 			charLine = append(charLine, line)
+			height++
 		}
 	}
 	if height > 0 {

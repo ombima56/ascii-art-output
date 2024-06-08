@@ -1,9 +1,8 @@
 package main
 
 import (
-	loadbanner "asciiartoutput/banner"
+	ascii "ascii/banner"
 	"fmt"
-
 	"os"
 	"strings"
 )
@@ -20,7 +19,28 @@ func main() {
 
 	input := os.Args[1]
 
-	input = strings.ReplaceAll(input, "\\n", "\n")
-	output := loadbanner.LoadBanner(input)
-	fmt.Println(output)
+	// input = strings.ReplaceAll(input, "\\n", "\n")
+	if input == "\n" {
+		fmt.Println()
+		return
+	} else if input == "" {
+		return
+	}
+	// Split the input into lines based on newline characters.
+
+	Input := strings.Split(input, "\n")
+
+	spaceCount := 0
+	// Iterate over each line of the input.
+	for _, word := range Input {
+		if word == "" {
+			spaceCount++
+			if spaceCount < len(Input) {
+				fmt.Println()
+			}
+		} else {
+			// Print the banner for non-empty strings.
+			ascii.PrinBanner(word)
+		}
+	}
 }
